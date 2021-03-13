@@ -5,46 +5,29 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', (req, res) => {
-  // find all products
-  // !!!be sure to include its associated Category and Tag data
+  // find all products, includes its associated Category and Tag data
   Product.findAll({
     include: [Category, {model: Tag, through: ProductTag}]
   }).then(result => {
-    res.json(result)
+    res.json(result);
   })
 });
-/////!!!! "category_id": null, display as the categoryIds
-  ///!  "categoryId": null/
 
-// get one product
+// get one product endpoint, includes its associated Category and Tag data
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
-  //!!! be sure to include its associated Category and Tag data
   Product.findOne({
     where: {
       id: req.params.id
     },
     include: [Category, {model: Tag, through: ProductTag}]
   }).then(result => {
-    res.json(result)
+    res.json(result);
   })
 });
-/////! "category_id": null, display as the categoryIds
-  ///!  "categoryId": null/
 
-
-// create new product
-/////!!!!This works as intended..
+// create new product endpoint
 router.post('/', (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
- //Product.create(req.body)
  Product.create(
    req.body
  ).then((product) => {
@@ -68,8 +51,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
-/// !!!works as intended, but when i update the values on insomnia, i get a bad request call
+// update product endpoint
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -111,7 +93,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-///this one works as intended
+///deleting a product endpoint
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
   Product.destroy({
@@ -119,7 +101,7 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   }).then(result => {
-    res.json(result)
+    res.json(result);
   })
 });
 

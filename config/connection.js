@@ -1,14 +1,12 @@
-//require('dotenv').config(); taking it out for now
-
 const Sequelize = require('sequelize');
 
-require('dotenv').config();
+require('dotenv').config(); ///requiring .env file, to use below
 
 const sequelize = process.env.JAWSDB_URL
   ? new Sequelize(process.env.JAWSDB_URL)
   : new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
       host: 'localhost',
-      port: 3306, ///maybe dont need this?
+      port: 3306, 
       dialect: 'mysql',
       dialectOptions: {
         decimalNumbers: true,
