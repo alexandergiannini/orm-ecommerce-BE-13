@@ -13,11 +13,20 @@ ProductTag.init(
       autoIncrement: true
     },
     product_id: {
-      type: DataTypes.STRING 
+      type: DataTypes.STRING,
+      references: {
+        model: 'product',
+        key: 'id'
+      } 
       //need to reference product model's id (from Product.js i think)
     },
    tag_id: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'tag',
+      key: 'id'
+    }
+  
     //need to tag model's id (from Tag.js i believe?)
    }
   },
